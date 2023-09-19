@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Listado de articulos
+{% endblock title %}
+
+<!-- llave simple: ejecutar un codigo de Python -->
+{% block content %}
+    <!-- ejecucion codigo Python: con la doble llave, le decimos a Django que debe RENDERIZAR (mostrar) ese contenido -->
+    <div class="container text-center">
+        <h1>Listado de Productos</h1>
+    </div>
+
+    <table class="table table-light table-bordered text-center">
+        <thead class="table-dark">
+        <tr>
+            <th width="10%" scope="col">ID producto</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Stock</th>
+            <th width="20%">Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for item in productos %}
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>{{item.nombre}}</td>
+                    <td>{{item.precio}}</td>
+                    <td>{{item.stock}}</td>
+                    <td>
+                        <a href="{% url 'editar' item.id %}"><button type="button" class="btn btn-warning">Editar</button></a>
+                        <a href="{% url 'eliminar' item.id %}"><button type="button" class="btn btn-danger">Eliminar</button></a>
+                    </td>
+                </tr>   
+            {% endfor %}   
+        </tbody>
+    </table>
+
+{% endblock content %}
