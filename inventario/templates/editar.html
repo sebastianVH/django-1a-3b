@@ -12,7 +12,7 @@
       <div class="container-sm">
         <form class="form-control" action="{% url 'editar' producto.id %}" method="post">
           {% csrf_token %}
-          <div class="mb-3">
+          <!-- <div class="mb-3">
             <label for="nombre" class="form-label">Nombre</label>
             <input type="text" class="form-control" name="nombre" id="nombre" aria-describedby="nombre_producto" value="{{producto.nombre}}">
             <div id="nombre_producto" class="form-text">Nombre entre 1 a 15 caracteres</div>
@@ -25,6 +25,21 @@
             <label class="form-label" for="stock">Stock</label>
             <input type="number" class="form-control" name="stock" id="stock" value="{{producto.stock}}">
           </div>
+          <div class="mb-3 ">
+            <label class="form-label" for="stock">Categorias</label>
+            <select class="form-select" name="categoria" id="categoria">
+              {% for categoria in categorias %}
+                {% if categoria.id == producto.categoria_fk.id %}
+                  <option value="{{categoria.id}}" selected>{{categoria.category_name}}</option>          
+                {% else %}
+                  <option value="{{categoria.id}}">{{categoria.category_name}}</option>
+                {% endif %}
+              {% endfor %}
+            </select>
+          </div> -->
+          <table class="table table-borderless">
+            {{formulario.as_table}}
+          </table>
             <button type="submit" class="btn btn-primary">Enviar</button>
             <a href="{% url 'index' %}" class="btn btn-danger">Cancelar</a>
         </form>
